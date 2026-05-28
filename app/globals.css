@@ -65,36 +65,11 @@ a {
 }
 
 .brand-mark {
-  position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 32px;
   height: 32px;
-  border-radius: 8px;
-  background: var(--kite-primary);
-  transform: rotate(-9deg);
-}
-
-.brand-mark span {
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: var(--kite-muted);
-}
-
-.brand-mark span:nth-child(1) {
-  top: 7px;
-  left: 7px;
-}
-
-.brand-mark span:nth-child(2) {
-  top: 7px;
-  right: 7px;
-}
-
-.brand-mark span:nth-child(3) {
-  right: 9px;
-  bottom: 7px;
 }
 
 .header-actions,

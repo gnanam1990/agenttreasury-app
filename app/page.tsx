@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import Image from "next/image";
 
 const VAULT = "0xe1844c5D63a9543023008D332Bd3d2e6f1FE1043";
 
@@ -78,9 +79,13 @@ export default function HomePage() {
       <header className="site-header">
         <a className="brand" href="#" aria-label="AgentTreasury home">
           <span className="brand-mark" aria-hidden="true">
-            <span />
-            <span />
-            <span />
+            <Image
+              src="/kite-logo-mark-black.png"
+              alt=""
+              width={32}
+              height={32}
+              priority
+            />
           </span>
           <span>AgentTreasury</span>
         </a>
