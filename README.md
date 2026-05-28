@@ -6,9 +6,9 @@ Treasury interface for AI agents on Kite Mainnet.
 
 This repo now contains a reproducible static frontend:
 
-- `index.html` - dashboard, approvals, and policy views
-- `styles.css` - warm Kite visual system
-- `app.js` - tab switching, asset filtering, proposal queueing, clipboard copy, and CSV export
+- `app/page.tsx` - dashboard, approvals, and policy views
+- `app/globals.css` - warm Kite visual system
+- `package.json` - reproducible Next.js production build
 
 ## Deployment
 

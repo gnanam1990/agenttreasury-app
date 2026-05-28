@@ -50,7 +50,7 @@ a {
   justify-content: space-between;
   gap: 16px;
   min-height: 64px;
-  padding: 12px clamp(16px, 4vw, 40px);
+  padding: 12px 40px;
   border-bottom: 1px solid var(--kite-border);
   background: rgba(254, 248, 240, 0.9);
   backdrop-filter: blur(14px);
@@ -109,7 +109,7 @@ a {
 main {
   width: min(1480px, 100%);
   margin: 0 auto;
-  padding: 28px clamp(16px, 4vw, 40px) 44px;
+  padding: 28px 40px 44px;
 }
 
 .workspace-head {
@@ -367,6 +367,12 @@ label {
 }
 
 @media (max-width: 900px) {
+  .site-header,
+  main {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
   .workspace-head,
   .dashboard-grid,
   .split-grid {
