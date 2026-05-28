@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AgentTreasury</title>
+    <meta
+      name="description"
+      content="Treasury controls for AI agents on Kite Mainnet."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="AgentTreasury home">
+        <span class="brand-mark" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span>AgentTreasury</span>
+      </a>
+      <nav class="header-actions" aria-label="Primary">
+        <button class="text-button" type="button" data-copy="0xe1844c5D63a9543023008D332Bd3d2e6f1FE1043">
+          Copy vault
+        </button>
+        <button class="primary-button" type="button" data-tab-target="approvals">
+          New proposal
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="workspace-head">
+        <div>
+          <p class="eyebrow">Kite Mainnet treasury</p>
+          <h1>Agent operating vault</h1>
+          <p class="vault-address">0xe1844c5D63a9543023008D332Bd3d2e6f1FE1043</p>
+        </div>
+        <div class="status-strip" aria-label="Treasury status">
+          <span>Policy guard: on</span>
+          <span>Signer threshold: 2 of 3</span>
+          <span>Last sync: 2 min ago</span>
+        </div>
+      </section>
+
+      <section class="metric-grid" aria-label="Treasury metrics">
+        <article class="metric-card">
+          <span>Total assets</span>
+          <strong>$124,820</strong>
+          <small>KITE, USDC.e, Test USDT</small>
+        </article>
+        <article class="metric-card">
+          <span>Runway</span>
+          <strong>84 days</strong>
+          <small>Based on 30 day spend</small>
+        </article>
+        <article class="metric-card">
+          <span>Queued approvals</span>
+          <strong id="approval-count">3</strong>
+          <small>1 over policy limit</small>
+        </article>
+        <article class="metric-card">
+          <span>Active policies</span>
+          <strong>5</strong>
+          <small>Daily, per-agent, token limits</small>
+        </article>
+      </section>
+
+      <div class="tabs" role="tablist" aria-label="Treasury views">
+        <button class="tab is-active" type="button" role="tab" aria-selected="true" data-tab-target="overview">
+          Overview
+        </button>
+        <button class="tab" type="button" role="tab" aria-selected="false" data-tab-target="approvals">
+          Approvals
+        </button>
+        <button class="tab" type="button" role="tab" aria-selected="false" data-tab-target="policies">
+          Policies
+        </button>
+      </div>
+
+      <section class="tab-panel is-active" id="overview">
+        <div class="dashboard-grid">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Asset allocation</h2>
+                <p>Current balances grouped by token.</p>
+              </div>
+              <select id="asset-filter" aria-label="Filter assets">
+                <option value="all">All assets</option>
+                <option value="stable">Stable assets</option>
+                <option value="native">Native assets</option>
+              </select>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Asset</th>
+                    <th>Balance</th>
+                    <th>Value</th>
+                    <th>Share</th>
+                  </tr>
+                </thead>
+                <tbody id="asset-table">
+                  <tr data-kind="native">
+                    <td>KITE</td>
+                    <td>18,420.00</td>
+                    <td>$73,680</td>
+                    <td>59%</td>
+                  </tr>
+                  <tr data-kind="stable">
+                    <td>USDC.e</td>
+                    <td>32,800.00</td>
+                    <td>$32,800</td>
+                    <td>26%</td>
+                  </tr>
+                  <tr data-kind="stable">
+                    <td>Test USDT</td>
+                    <td>18,340.00</td>
+                    <td>$18,340</td>
+                    <td>15%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Spend queue</h2>
+                <p>Pending requests waiting for signer action.</p>
+              </div>
+              <button class="ghost-button" type="button" id="export-csv">Export CSV</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Agent</th>
+                    <th>Request</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="queue-table">
+                  <tr>
+                    <td>docs-agent</td>
+                    <td>Index docs update</td>
+                    <td>42 USDC.e</td>
+                    <td><span class="badge">ready</span></td>
+                  </tr>
+                  <tr>
+                    <td>market-agent</td>
+                    <td>API listing refresh</td>
+                    <td>16 USDC.e</td>
+                    <td><span class="badge warn">review</span></td>
+                  </tr>
+                  <tr>
+                    <td>pay-agent</td>
+                    <td>Payment link audit</td>
+                    <td>8 KITE</td>
+                    <td><span class="badge">ready</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="approvals">
+        <div class="split-grid">
+          <form class="panel proposal-form" id="proposal-form">
+            <h2>Create spend proposal</h2>
+            <label>
+              Agent
+              <input name="agent" placeholder="agent-name" required />
+            </label>
+            <label>
+              Request
+              <input name="request" placeholder="Purpose" required />
+            </label>
+            <label>
+              Amount
+              <input name="amount" placeholder="25 USDC.e" required />
+            </label>
+            <button class="primary-button" type="submit">Queue proposal</button>
+          </form>
+
+          <section class="panel">
+            <h2>Signer health</h2>
+            <div class="signer-list">
+              <div>
+                <span>Owner</span>
+                <strong>online</strong>
+              </div>
+              <div>
+                <span>Operations</span>
+                <strong>online</strong>
+              </div>
+              <div>
+                <span>Recovery</span>
+                <strong>standby</strong>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="policies">
+        <div class="policy-grid">
+          <section class="panel">
+            <h2>Daily spend limit</h2>
+            <div class="slider-row">
+              <input type="range" min="100" max="5000" value="1200" id="daily-limit" />
+              <strong><span id="daily-limit-value">1200</span> USDC.e</strong>
+            </div>
+          </section>
+          <section class="panel">
+            <h2>Token allowlist</h2>
+            <label class="toggle-line">
+              <input type="checkbox" checked />
+              KITE
+            </label>
+            <label class="toggle-line">
+              <input type="checkbox" checked />
+              USDC.e
+            </label>
+            <label class="toggle-line">
+              <input type="checkbox" checked />
+              Test USDT
+            </label>
+          </section>
+          <section class="panel">
+            <h2>Approval rule</h2>
+            <p class="policy-copy">
+              Requests over 100 USDC.e require two signers before execution.
+            </p>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

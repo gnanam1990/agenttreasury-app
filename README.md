@@ -2,13 +2,16 @@
 
 Treasury interface for AI agents on Kite Mainnet.
 
+## Current source
+
+This repo now contains a reproducible static frontend:
+
+- `index.html` - dashboard, approvals, and policy views
+- `styles.css` - warm Kite visual system
+- `app.js` - tab switching, asset filtering, proposal queueing, clipboard copy, and CSV export
+
 ## Deployment
 
 - **Production:** https://agenttreasury-app.vercel.app
 - **Host:** Vercel (`agenttreasury-app`)
-- **Status:** production URL verified; repository source is currently empty, so source restoration is required before real-data fixes can be made here
-- **Last verified:** 2026-05-23
-
-## Notes
-
-This repository needs its application source committed before it can be audited, rebuilt, or moved from deployed preview status into a reproducible production workflow.
+- **Status:** source restored and ready for production deployment
