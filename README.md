@@ -49,6 +49,7 @@ npm run build && npm start
 ```text
 app/
   page.tsx      dashboard, approvals, and policy views (all client-side state)
+  api/stats/    GET /api/stats for external dashboards (503 until wired to chain)
   layout.tsx    root layout and metadata
   globals.css   warm Kite visual system
 public/
